@@ -13,7 +13,7 @@ int _printf(const char *format, ...)
 		 {"%%", printf_percent}
 	};
 
-	int i;
+	int i= 0;
 	int x;
 	int length = 0;
 	va_list args;
@@ -24,8 +24,8 @@ int _printf(const char *format, ...)
 Here:
 	while (format[i] != '\0')
 	{
-		x = 0;
-		while (x <= 2)
+		x = 2;
+		while (x >= 0)
 		{
 			if (s[x].specs[0] == format[i] && s[x].specs[1] == format[i + 1])
 			{
@@ -33,7 +33,7 @@ Here:
 				i = i + 2;
 				goto Here;
 			}
-			x++;
+			x--;
 		}
 		_putchar(format[i]);
 		length++;
