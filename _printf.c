@@ -7,48 +7,39 @@
  */
 int _printf(const char *format, ...)
 {
+	spec_fun s[] =
+	{
+		{"%s", printf_s},
+		 {"%", printf_c},
+		 {"%%", printf_percent}
+	};
+
 	int i;
 	int x;
-	int count = 0;
-	char *str;
-	va_list arg_list;
-	
-	if (format == NULL)
-		return -1;
-	va_start(arg_list, format);
-	for (i = 0; format[i] != '\0'; i++)
+	int length = 0;
+	va_list args;
+
+	va_start(args, format);
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+		return (-1);
+Here:
+	while (format[i] != '\0')
 	{
-		if (format[i] != '%')
+		x = 0;
+		while (x <= 2)
 		{
-			_putchar(format[0]);
-			count++;
+			if (s[x].specs[0] == format[i] && s[x].specs[1] == format[i + 1])
+			{
+				length += s[x].func(args);
+				i = i + 2;
+				goto Here;
+			}
+			x++;
 		}
-		else
-		{
-			format++;
-		switch (format[i])
-		{
-			case 'c':
-				_putchar( va_arg(arg_list, int));
-				count++;
-				break;
-			case 's':
-				str = va_arg(arg_list,  char*);
-				if (!str)
-					str = "(nil)";
-				for (x = 0 ; str[x] != '\0'; x++)
-					_putchar(str[x]);
-				count++;
-				break;
-			case '%':
-				_putchar('%');
-				count++;
-				break;
-			default:
-				break;
-		}
-		}
+		_putchar(format[i]);
+		length++;
+		i++;
 	}
-	va_end(arg_list);
-	return (count);
+	va_end(args);
+	return (length);
 }
