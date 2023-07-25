@@ -8,23 +8,23 @@
 int printf_s(va_list argz)
 {
 	char *str;
-	int x;
+	int f;
 	int length;
 
-	str = va_arg(argz,  char*);
+	str = va_arg(argz,  char *);
 	if (!str)
 	{
 		str = "(nil)";
 		length = strlen(str);
-		for (x = 0 ; str[x] != '\0'; x++)
-			_putchar(str[x]);
+		for (f = 0 ; str[f] != '\0'; f++)
+			_putchar(str[f]);
 		return (length);
 	}
 	else
 	{
 		length = strlen(str);
-		for (x = 0 ; str[x] != '\0'; x++)
-			_putchar(str[x]);
+		for (f = 0 ; str[f] != '\0'; f++)
+			_putchar(str[f]);
 		return (length);
 	}
 

@@ -9,11 +9,11 @@ int _printf(const char *format, ...)
 {
 	spec_fun s[] = {
 		{"%s", printf_s},
-		 {"%", printf_c},
+		 {"%c", printf_c},
 		 {"%%", printf_percent}
 	};
 
-	int i= 0;
+	int i = 0;
 	int x;
 	int length = 0;
 	va_list args;
