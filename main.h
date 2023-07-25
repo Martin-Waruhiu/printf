@@ -6,7 +6,6 @@
 #include <unistd.h>
 #include <stdarg.h>
 
-<<<<<<< HEAD
 #define BUFF_SIZE 1024
 #define UNUSED(x) (void)(x)
 
@@ -95,7 +94,7 @@ int write_num(int ind, char bff[], int flags, int width, int precision,
 int length, char padd, char extra_c);
 int write_pointer(char buffer[], int ind, int length,
 int width, int flags, char padd, char extra_c, int padd_start);
-=======
+
 
 /**
  * struct format - name of struct
@@ -112,8 +111,7 @@ int _printf(const char *format, ...);
 int _putchar(char c);
 int printf_s(va_list argz);
 int printf_c(va_list argz);
-int printf_percent(void);
->>>>>>> 20ca11f29257ce35b2558780896e0a726e1e10be
+int printf_percent(void>;
 
 long int convert_size_unsgnd(unsigned long int num, int size);
 int is_printable(char);
