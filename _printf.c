@@ -7,8 +7,7 @@
  */
 int _printf(const char *format, ...)
 {
-	spec_fun s[] =
-	{
+	spec_fun s[] = {
 		{"%s", printf_s},
 		 {"%", printf_c},
 		 {"%%", printf_percent}
