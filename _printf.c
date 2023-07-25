@@ -10,7 +10,7 @@ int _printf(const char *format, ...)
 	spec_fun s[] = {
 		{"%s", printf_s},
 		 {"%c", printf_c},
-		 {"%%", printf_percent}
+		{"%%", printf_percent}
 	};
 
 	int i = 0;
