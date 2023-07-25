@@ -1,42 +1,57 @@
 #include "main.h"
+void print_buffer(char buffer[], int *buff_ind);
 /**
- * _printf - function that produces output according to a format
- *@format: first argument
- *...: unknown variables
- * Return: 0
- */
+* _printf - a function that print specifiers
+* @format: format.
+* Return: count
+*/
 int _printf(const char *format, ...)
 {
-	spec_fun s[] = {
-		{"%s", printf_s},
-		 {"%c", printf_c},
-		{"%%", printf_percent}
-	};
+	char buffer[BUFF_SIZE];
+	int flags, width, precision, size, buff_ind = 0;
+	va_list list;
+	int i, printed = 0, chars = 0;
 
-	int i = 0;
-	int x;
-	int length = 0;
-	va_list args;
-
-	va_start(args, format);
-	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+	if (format == NULL)
 		return (-1);
-	while (format[i] != '\0')
+	va_start(list, format);
+	for (i = 0; format && format[i] != '\0'; i++)
 	{
-		x = 2;
-		while (x >= 0)
+		if (format[i] != '%')
 		{
-			if (s[x].specs[0] == format[i] && s[x].specs[1] == format[i + 1])
-			{
-				length += s[x].func(args);
-				i = i + 2;
-			}
-			x--;
+			buffer[buff_ind++] = format[i];
+			if (buff_ind == BUFF_SIZE)
+				print_buffer(buffer, &buff_ind);
+			chars++;
 		}
-		_putchar(format[i]);
-		length++;
-		i++;
+		else
+		{
+			print_buffer(buffer, &buff_ind);
+			flags = get_flags(format, &i);
+			width = get_width(format, &i, list);
+			precision = get_precision(format, &i, list);
+			size = get_size(format, &i);
+			++i;
+			printed = handle_print(format, &i, list,
+					buffer, flags, width,
+					precision, size);
+			if (printed == -1)
+				return (-1);
+			chars += printed;
+		}
 	}
-	va_end(args);
-	return (length);
+	print_buffer(buffer, &buff_ind);
+	va_end(list);
+	return (chars);
+}
+/**
+* print_buffer - Buffer contents
+* @buffer: character arrays
+* @buff_ind: lenght index
+*/
+void print_buffer(char buffer[], int *buff_ind)
+{
+	if (*buff_ind > 0)
+		write(1, &buffer[0], *buff_ind);
+	*buff_ind = 0;
 }
