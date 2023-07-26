@@ -1,3 +1,4 @@
+#include "main.h"
 /**
 * print_percent -outputs %
 *  @flags: active flags
