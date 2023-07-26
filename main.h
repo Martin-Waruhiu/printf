@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdarg.h>
+#include <stddef.h>
 
 #define BUFF_SIZE 1024
 #define UNUSED(x) (void)(x)
@@ -18,26 +19,6 @@
 
 #define S_LONG 2
 #define S_SHORT 1
-
-/**
-* struct format - Struct operations
-*
-* @fmt: The format.
-* @fn: The function associated.
-*/
-struct format
-{
-char fmt;
-int (*fn)(va_list, char[], int, int, int, int);
-};
-
-/**
-* typedef struct format spec_fun - Struct operations
-*
-* @format: The format.
-* @spec_fun: The function associated.
-*/
-typedef struct format spec_fun;
 
 int _printf(const char *format, ...);
 int handle_print(const char *fmt, int *i,
@@ -97,21 +78,30 @@ int width, int flags, char padd, char extra_c, int padd_start);
 
 
 /**
- * struct format - name of struct
- * @specs: - Array of char pointer
- * @func: pointer to function
+ * struct fmt - structure
+ *
+ * @fmt: formatt
+ * @fn: The funccc
  */
-typedef struct format
+struct fmt
 {
-	char *specs;
-	int (*func)();
-} spec_fun;
+        char fmt;
+        int (*fn)(va_list, char[], int, int, int, int);
+};
+
+/**
+ * typedef struct fmt fmt_t - Structure operationn
+ *
+ * @fmt: The formatt
+ * @fm_t: The assocoated
+ */
+typedef struct fmt fmt_t;
 
 int _printf(const char *format, ...);
 int _putchar(char c);
 int printf_s(va_list argz);
 int printf_c(va_list argz);
-int printf_percent(void>;
+int printf_percent(void);
 
 long int convert_size_unsgnd(unsigned long int num, int size);
 int is_printable(char);

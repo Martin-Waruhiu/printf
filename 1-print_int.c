@@ -20,7 +20,7 @@ int print_int(va_list types, char buffer[],
 	int i = BUFF_SIZE - 2;
 
 
-	x = convert_size_number(n, size);
+	x = convert_size_number(x, size);
 
 
 	if (x == 0)

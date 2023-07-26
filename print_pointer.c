@@ -43,5 +43,5 @@ int print_pointer(va_list types, char buffer[],
 		extra_c = ' ', len++;
 	n++;
 	return (write_pointer(buffer, n, len,
-				width, flags, padd, extra_c, padd_st));
+				width, flags, padd, extra_c, pad_st));
 }

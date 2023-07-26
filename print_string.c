@@ -1,3 +1,5 @@
+#include "main.h"
+
 /**
 * print_string - Outputs a string
 * @precision: precision
